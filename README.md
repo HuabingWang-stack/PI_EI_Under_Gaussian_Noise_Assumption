@@ -1,47 +1,47 @@
-# Bayesian optimization with Gaussian processes
+# PI and EI under gaussian noise assumption
 
-This repository contains Python code for Bayesian optimization using Gaussian processes. It contains two directories:
+This repository contains Python code for Bayesian optimization PI, EI and a modification of PI and EI under gaussian noise assumption.
+ It contains three files:
 
-* `python`: Contains two python scripts `gp.py` and `plotters.py`, that contain the optimization code, and utility functions to plot iterations of the algorithm, respectively.
-* `ipython-notebooks`: Contains an IPython notebook that uses the Bayesian algorithm to tune the hyperparameters of a support vector machine on a dummy classification task.
+* `bo_acquis.py`: Contains the Bayesian Optimisation, code for PI and EI modified from [bayesian-optimization](https://github.com/thuijskens/bayesian-optimization), and new code for MPI and MEI.
+* `plotters.py` : Contains plotter functions for plotting surface for estimated loss and acquisition value in each iteration adapted from [bayesian-optimization](https://github.com/thuijskens/bayesian-optimization).
+that contains the optimization code, and utility functions to plot iterations of the algorithm, respectively.
+* `PI_EI_MPI_MEI_Benchmark.ipynb`: A tutorial that uses the Bayesian algorithm with the 4 acquisitions to find the global optima on noise corrupted [benchmark functions](http://www.resibots.eu/limbo/bo_benchmarks.html).
 
-The signature of the optimization function is:
+The signature of the optimization function is still:
 
 ```python
 bayesian_optimisation(n_iters, sample_loss, bounds, x0=None, n_pre_samples=5,
                       gp_params=None, random_search=False, alpha=1e-5, epsilon=1e-7)
 ```
 
-and its docstring is:
+### Background
 
-```
-bayesian_optimisation
+PI and EI are two acquisition functions that return Probability of Improvement and Expected Improvement with respect to current optima $\tilde{y}$.
+In some cases, the evaluations on loss function has a noise $y_i \sim \N (f(\mathbf{x})_i,\sigma^2_y)$. 
+PI and EI are modified under the assumption that the current optima has a noise. They calcualtes Probability of Improvement and Expected Improvement with respect to 
+posterior variance of loss optimum $ k(\tilde{\mathbf{x}},\tilde{\mathbf{x}})$ instead.  (where $\tilde{\mathbf{x}}$ is parameter setting at current optima.)
 
-  Uses Gaussian Processes to optimise the loss function `sample_loss`.
+ Let $\rho$ denotes $ \sqrt{k(\mathbf{x},\mathbf{x})+k(\tilde{\mathbf{x}},\tilde{\mathbf{x}})-2k(\mathbf{x},\tilde{\mathbf{x}})$. Mathematical expression of Modified PI and EI under gaussian noise assumption:
 
-  Arguments:
-  ----------
-      n_iters: integer.
-          Number of iterations to run the search algorithm.
-      sample_loss: function.
-          Function to be optimised.
-      bounds: array-like, shape = [n_params, 2].
-          Lower and upper bounds on the parameters of the function `sample_loss`.
-      x0: array-like, shape = [n_pre_samples, n_params].
-          Array of initial points to sample the loss function for. If None, randomly
-          samples from the loss function.
-      n_pre_samples: integer.
-          If x0 is None, samples `n_pre_samples` initial points from the loss function.
-      gp_params: dictionary.
-          Dictionary of parameters to pass on to the underlying Gaussian Process.
-      random_search: integer.
-          Flag that indicates whether to perform random search or L-BFGS-B optimisation
-          over the acquisition function.
-      alpha: double.
-          Variance of the error term of the GP.
-      epsilon: double.
-          Precision tolerance for floats.
-```
-* make sure you have conda installed in order to reset the environment
-* create an identical environment in windows by `conda my_env_name create -f environment_for_conda_in_windows.yml`
+$$
+\text{Modified PI: }  a_{MPI}(x) = \Phi \left(\frac{\mu(\tilde{\mathbf{x}}) - \mu(\mathbf{x}) }{\rho})}}\right)
+
+\text{Modified EI: } a_{MEI} = \Phi(\frac{\mu(\tilde{\mathbf{x}}) - \mu(\mathbf{x})}{\rho})(\mu(\tilde{\mathbf{x}}) - \mu(\mathbf{x}))+
+        \phi(\frac{\mu(\tilde{\mathbf{x}}) - \mu(\mathbf{x})}{\rho})\rho
+$$
+
+### Current Experiment Result
+
+MPI shows a slightly better result than PI on both original and noised corrupted rastrigin function.
+Where rastrigin has a complex surface itself.
+The reason is that MPI leverages more importance on exploration than PI.
+MEI does not show better performance than EI on benchmark functions without noise.
+
+Perform Bayesian Optimisation on Rastrigin function with PI and MPI; probability of improvement and loss surface in each iteration is plotted.
+
+| Rastrigin Surface | PI Searching Trajectory             |  MPI Searching Trajectory |
+:-------------------------:|:-------------------------: |:-------------------------:
+| ![Alt Text](.\rastrigin\real_loss_rastrigin.png) | ![Alt Text](.\rastrigin\noise_less\PI_rastrigin\bo_2d_new_data.gif)  |  ![Alt Text](.\rastrigin\noise_less\MPI_rastrigin\bo_2d_new_data.gif)
+
 
