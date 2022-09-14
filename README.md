@@ -20,12 +20,12 @@ bayesian_optimisation(n_iters, sample_loss, bounds, x0=None, n_pre_samples=5,
 PI and EI are two acquisition functions that return Probability of Improvement and Expected Improvement with respect to current optima $\tilde{y}$.
 In some cases, the evaluations on loss function has a noise $y_i \sim \mathcal{N} (f(\mathbf{x})_i,\sigma^2_y)$. 
 PI and EI are modified under the assumption that the current optima has a noise. They calcualtes Probability of Improvement and Expected Improvement with respect to 
-posterior variance of loss optimum $ k(\tilde{\mathbf{x}},\tilde{\mathbf{x}}) $ instead.  (where $\tilde{\mathbf{x}}$ is parameter setting at current optima.)
+posterior variance of loss optimum $ k( \tilde{\mathbf{x}}, \tilde{\mathbf{x}}) $ instead.  (where $\tilde{\mathbf{x}}$ is parameter setting at current optima.)
 
- Let $\rho$ denotes $ \sqrt{k(\mathbf{x},\mathbf{x})+k(\tilde{\mathbf{x}},\tilde{\mathbf{x}})-2k(\mathbf{x},\tilde{\mathbf{x}})}$. Mathematical expression of Modified PI and EI under gaussian noise assumption:
+ Let $\rho$ denotes $ \sqrt{k(\mathbf{x}, \mathbf{x})+k(\tilde{\mathbf{x}}, \tilde{\mathbf{x}})-2k(\mathbf{x}, \tilde{\mathbf{x}})}$. Mathematical expression of Modified PI and EI under gaussian noise assumption:
 
 $$
-\text{Modified PI: }  a_{MPI}(x) = \Phi \left(\frac{\mu(\tilde{\mathbf{x}}) - \mu(\mathbf{x}) }{\rho})}}\right)
+\text{Modified PI: }  a_{MPI}(x) = \Phi \left(\frac{\mu(\tilde{\mathbf{x}}) - \mu ( \mathbf{x} ) }{\rho})\right)
 $$
 
 $$
@@ -42,7 +42,8 @@ MEI does not show better performance than EI on benchmark functions without nois
 
 Perform Bayesian Optimisation on Rastrigin function with PI and MPI; probability of improvement and loss surface in each iteration is plotted.
 
-| Rastrigin Surface | PI Searching Trajectory             |  MPI Searching Trajectory |
-| ![Alt Text](.\rastrigin\real_loss_rastrigin.png) | ![Alt Text](.\rastrigin\noise_less\PI_rastrigin\bo_2d_new_data.gif)  |  ![Alt Text](.\rastrigin\noise_less\MPI_rastrigin\bo_2d_new_data.gif)
+| Rastrigin Surface | PI Searching Trajectory  |  MPI Searching Trajectory |
+|:-------------------------:|:-------------------------: |:-------------------------:|
+| ![Alt Text](.\rastrigin\real_loss_rastrigin.png) | ![Alt Text](.\rastrigin\noise_less\PI_rastrigin\bo_2d_new_data.gif)  |  ![Alt Text](.\rastrigin\noise_less\MPI_rastrigin\bo_2d_new_data.gif) |
 
 
