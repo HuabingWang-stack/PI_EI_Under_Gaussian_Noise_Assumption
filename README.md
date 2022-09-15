@@ -22,7 +22,7 @@ In some cases, the evaluations on loss function has a noise $y_i \sim \mathcal{N
 PI and EI are modified under the assumption that the current optima has a noise. They calcualtes Probability of Improvement and Expected Improvement with respect to 
 posterior variance of loss optimum $\kappa(\tilde{\mathbf{x}},\tilde{\mathbf{x}})$ instead.  (where $\tilde{\mathbf{x}}$ is parameter setting at current optima.)
 
- Let $\rho$ denotes $ (\kappa (\mathbf{x}, \mathbf{x})+ \kappa (\tilde{\mathbf{x}}, \tilde{\mathbf{x}})-2 \kappa (\mathbf{x}, \tilde{\mathbf{x}}))^{1/2}$. Mathematical expression of Modified PI and EI under gaussian noise assumption:
+ Let $\rho$ denotes $ (\kappa (\mathbf{x}, \mathbf{x})+ \kappa (\tilde{\mathbf{x}}, \tilde{\mathbf{x}})-2 \kappa (\mathbf{x}, \tilde{\mathbf{x}}))^{\frac{1}{2}}$. Mathematical expression of Modified PI and EI under gaussian noise assumption:
 
 $$
 \text{Modified PI: }  a_{MPI}(x) = \Phi \left(\frac{\mu(\tilde{\mathbf{x}}) - \mu ( \mathbf{x} ) }{\rho})\right)
