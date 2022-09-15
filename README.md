@@ -1,10 +1,10 @@
 # PI and EI under gaussian noise assumption
 
-This repository contains Python code for Bayesian optimization PI, EI and a modification of PI and EI under gaussian noise assumption.
- It contains three files:
+This repository contains Python code for Bayesian optimization PI, EI and a modification of PI (MPI) and EI (MEI) under gaussian noise assumption.
+ It has three files:
 
-* `bo_acquis.py`: Contains the Bayesian Optimisation, code for PI and EI modified from [bayesian-optimization](https://github.com/thuijskens/bayesian-optimization), and new code for MPI and MEI.
-* `plotters.py` : Contains plotter functions for plotting surface for estimated loss and acquisition value in each iteration adapted from [bayesian-optimization](https://github.com/thuijskens/bayesian-optimization).
+* `bo_acquis.py`: code for Bayesian Optimisation, PI and EI modified from [bayesian-optimization](https://github.com/thuijskens/bayesian-optimization), and new code for MPI and MEI.
+* `plotters.py` : plotter functions for plotting surface for estimated loss and acquisition value in each iteration adapted from [bayesian-optimization](https://github.com/thuijskens/bayesian-optimization).
 that contains the optimization code, and utility functions to plot iterations of the algorithm, respectively.
 * `PI_EI_MPI_MEI_Benchmark.ipynb`: A tutorial that uses the Bayesian algorithm with the 4 acquisitions to find the global optima on noise corrupted [benchmark functions](http://www.resibots.eu/limbo/bo_benchmarks.html).
 
