@@ -20,9 +20,9 @@ bayesian_optimisation(n_iters, sample_loss, bounds, x0=None, n_pre_samples=5,
 PI and EI are two acquisition functions that return Probability of Improvement and Expected Improvement with respect to current optima $\tilde{y}$.
 In some cases, the evaluations on loss function has a noise $y_i \sim \mathcal{N} (f(\mathbf{x})_i,\sigma^2_y)$. 
 PI and EI are modified under the assumption that the current optima has a noise. They calcualtes Probability of Improvement and Expected Improvement with respect to 
-posterior variance of loss optimum $ k( \tilde{\mathbf{x}}, \tilde{\mathbf{x}}) $ instead.  (where $\tilde{\mathbf{x}}$ is parameter setting at current optima.)
+posterior variance of loss optimum $\kappa(\tilde{\mathbf{x}},\tilde{\mathbf{x}})$ instead.  (where $\tilde{\mathbf{x}}$ is parameter setting at current optima.)
 
- Let $\rho$ denotes $ \sqrt{k(\mathbf{x}, \mathbf{x})+k(\tilde{\mathbf{x}}, \tilde{\mathbf{x}})-2k(\mathbf{x}, \tilde{\mathbf{x}})}$. Mathematical expression of Modified PI and EI under gaussian noise assumption:
+ Let $\rho$ denotes $ \sqrt{\kappa (\mathbf{x}, \mathbf{x})+ \kappa (\tilde{\mathbf{x}}, \tilde{\mathbf{x}})-2\kappa (\mathbf{x}, \tilde{\mathbf{x}})}$. Mathematical expression of Modified PI and EI under gaussian noise assumption:
 
 $$
 \text{Modified PI: }  a_{MPI}(x) = \Phi \left(\frac{\mu(\tilde{\mathbf{x}}) - \mu ( \mathbf{x} ) }{\rho})\right)
