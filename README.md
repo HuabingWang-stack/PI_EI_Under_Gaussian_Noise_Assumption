@@ -42,8 +42,8 @@ MEI does not show better performance than EI on benchmark functions without nois
 
 Perform Bayesian Optimisation on Rastrigin function with PI and MPI; probability of improvement and loss surface in each iteration is plotted.
 
-| Rastrigin Surface | PI Searching Trajectory  |  MPI Searching Trajectory |
-|:-------------------------:|:-------------------------: |:-------------------------:|
-| ![Alt Text](.\rastrigin\real_loss_rastrigin.png) | ![Alt Text](.\rastrigin\noise_less\PI_rastrigin\bo_2d_new_data.gif)  |  ![Alt Text](.\rastrigin\noise_less\MPI_rastrigin\bo_2d_new_data.gif) |
+|                Rastrigin Surface                 |                       PI Searching Trajectory                       |                       MPI Searching Trajectory                       |
+|:------------------------------------------------:|:-------------------------------------------------------------------:|:--------------------------------------------------------------------:|
+| ![Alt Text](./rastrigin/real_loss_rastrigin.png) | ![Alt Text](./rastrigin/noise_less/PI_rastrigin/bo_2d_new_data.gif) | ![Alt Text](./rastrigin/noise_less/MPI_rastrigin/bo_2d_new_data.gif) |
 
 
