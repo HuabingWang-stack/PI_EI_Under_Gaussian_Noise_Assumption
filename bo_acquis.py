@@ -203,7 +203,7 @@ def sample_next_hyperparameter(acquisition_func, gaussian_process, evaluated_los
     
         
     best_x = None
-    best_acquisition_value = np.inf
+    best_acquisition_value = 1000
     n_params = bounds.shape[0]
     # optimize for MPI MEI
     if evaluated_loss_positions is not None:
@@ -280,11 +280,18 @@ def bayesian_optimisation(n_iters, sample_loss, bounds, x0=None, n_pre_samples=5
     if gp_params is not None:
         model = gp.GaussianProcessRegressor(**gp_params)
     else:
-        kernel = gp.kernels.Matern()
-        model = gp.GaussianProcessRegressor(kernel=kernel,
-                                            alpha=alpha,
-                                            n_restarts_optimizer=10,
-                                            normalize_y=True)
+        if acquisition_func == Mexpected_improvement or acquisition_func == Mprobability_improvement:
+            kernel = gp.kernels.Matern()+gp.kernels.WhiteKernel()
+            model = gp.GaussianProcessRegressor(kernel=kernel,
+                                                alpha=alpha,
+                                                n_restarts_optimizer=10,
+                                                normalize_y=True)
+        else:
+            kernel = gp.kernels.Matern()
+            model = gp.GaussianProcessRegressor(kernel=kernel,
+                                                alpha=alpha,
+                                                n_restarts_optimizer=10,
+                                                normalize_y=True)
 
     if acquisition_func == Mexpected_improvement or acquisition_func == Mprobability_improvement:
 
