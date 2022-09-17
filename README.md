@@ -21,7 +21,8 @@ PI and EI are two acquisition functions that return Probability of Improvement a
 In some cases, the evaluations on loss function has a noise $y_i \sim \mathcal{N} (f(\mathbf{x})_i,\sigma^2_y)$. 
 PI and EI are modified under the assumption that the current optima has a noise. They calcualtes Probability of Improvement and Expected Improvement with respect to 
 posterior variance of loss optimum $\kappa(\tilde{\mathbf{x}},\tilde{\mathbf{x}})$ instead.  (where $\tilde{\mathbf{x}}$ is parameter setting at current optima.) 
-To lean the gaussian noise in sampling loss functions, we add a white kernel into the orignally adopted GP matern kernel to fit the noise. 
+To lean the gaussian noise in sampling loss functions and update the uncertainty quantification at evaluated locations,
+we add a white kernel into the originally adopted GP matern kernel. 
 
  Let $\rho$ denotes $\sqrt{\kappa (\mathbf{x}, \mathbf{x})+ \kappa (\tilde{\mathbf{x}}, \tilde{\mathbf{x}})-2 \kappa (\mathbf{x}, \tilde{\mathbf{x}})}$. Mathematical expression of Modified PI and EI under gaussian noise assumption:
 
@@ -44,15 +45,15 @@ against pre-set gaussian noise $\(\mathcal{\mu=0,\sigma = 10})$, and is believed
 
 Below is the lowest loss we achieved on each benchmark function adding a gaussian noise $\(\mathcal{\mu=0,\sigma = 10})$.
 Bayesian Optimisation parameter-setting is : iter = 45, random_search=10000. 
-The result is averaged throughout 30 repeated trails, in mean$pm$std.
+The result is averaged throughout 30 repeated trails, in mean±std.
 |acquisition functions   |six-hump       |rastrigin      |goldstein      |rotated-hyper-ellipsoid|sphere          |
 |------------------------|---------------|-------------  |-------------- |-----------------------|----------------|
-|MPI, kernel=matern+white|-21.58$\pm$5.30|-10.20$\pm$6.10|10.77$\pm$5.85 |-21.54$\pm$5.40        |-15.28 $\pm$6.77|
-|MEI, kernel=matern+white|-20.34$\pm$4.04|-10.98$\pm$4.64|24.20$\pm$8.47 |-18.11$\pm$4.97        |-15.65$\pm$5.29 |
-|PI, kernel=matern+white |-14.96$\pm$5.34|-3.34$\pm$9.15 |28.83$\pm$18.46|14.70$\pm$76.71        |-12.20$\pm$5.68 |
-|EI, kernel=matern+white |-16.56$\pm$5.82|-4.60$\pm$8.27 |23.60$\pm$7.19 |-18.84$\pm$5.61        |-14.68$\pm$5.36 |
-|PI, kernel=matern       |-21.75$\pm$5.28|-6.39$\pm$6.85 |13.16$\pm$6.09 |-16.33$\pm$4.51        |-15.14$\pm$5.83 |
-|EI, kernel=matern       |-20.57$\pm$4.74|-8.29$\pm$7.45 |22.94$\pm7.27$ |-18.43$\pm$5.15        |-13.52$\pm$6.05 |
+|MPI, kernel=matern+white|-21.58±5.30|-10.20±6.10|10.77±5.85 |-21.54±5.40        |-15.28±6.77|
+|MEI, kernel=matern+white|-20.34±4.04|-10.98±4.64|24.20±8.47 |-18.11±4.97        |-15.65±5.29 |
+|PI, kernel=matern+white |-14.96±5.34|-3.34±9.15 |28.83±18.46|14.70±76.71        |-12.20±5.68 |
+|EI, kernel=matern+white |-16.56±5.82|-4.60±8.27 |23.60±7.19 |-18.84±5.61        |-14.68±5.36 |
+|PI, kernel=matern       |-21.75±5.28|-6.39±6.85 |13.16±6.09 |-16.33±4.51        |-15.14±5.83 |
+|EI, kernel=matern       |-20.57±4.74|-8.29±7.45 |22.9±47.27 |-18.43±5.15        |-13.52±6.05 |
 
 
 Perform Bayesian Optimisation on rastrigin function with PI (kernel=matern) and MPI (kernel = matern+white); probability of improvement and loss surface in each iteration is plotted.
