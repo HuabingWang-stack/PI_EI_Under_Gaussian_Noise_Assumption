@@ -1,6 +1,6 @@
 # PI and EI under gaussian noise assumption
 
-This repository contains Python code for Bayesian optimization PI, EI and a modification of PI (MPI) and EI (MEI) under gaussian noise assumption.
+This repository contains Python code for Bayesian optimization PI, EI and a modification of PI (MPI) and EI (MEI) under gaussian noise assumption at in loss function.
  It has three files:
 
 * `bo_acquis.py`: code for Bayesian Optimisation, PI and EI modified from [bayesian-optimization](https://github.com/thuijskens/bayesian-optimization), and new code for MPI and MEI.
@@ -20,9 +20,9 @@ bayesian_optimisation(n_iters, sample_loss, bounds, x0=None, n_pre_samples=5,
 Probability of improvement(PI) and expected improvement(EI) are calculated with respect to current optima $\tilde{y}$.
 In some cases, the evaluations on loss function has a gaussian noise $y_i \sim \mathcal{N} (f(\mathbf{x})_i,\sigma^2_y)$. 
 Here we modifie PI and EI under the assumption that all observations including current optima has a noise. They calculate probability of improvement and expected improvement with respect to 
-posterior variance $\kappa(\tilde{\mathbf{x}},\tilde{\mathbf{x}})$ at loss optimum instead.  (where $\tilde{\mathbf{x}}$ is parameter setting at current optima.) 
-To lean the gaussian noise in sampling loss functions and update the uncertainty quantification at evaluated locations,
-we add a white kernel into the originally adopted GP matern kernel. 
+posterior mean $\mu(\tilde{\mathbf{x}})$ and  variance $\kappa(\tilde{\mathbf{x}},\tilde{\mathbf{x}})$ at loss optimum instead.  (where $\tilde{\mathbf{x}}$ is parameter setting at current optima.) 
+To lean the gaussian noise in observations, we add a white kernel into the originally adopted GP matern kernel. This 
+enables uncertainty quantification at evaluated locations.
 
  Let $\rho$ denotes $\sqrt{\kappa (\mathbf{x}, \mathbf{x})+ \kappa (\tilde{\mathbf{x}}, \tilde{\mathbf{x}})-2 \kappa (\mathbf{x}, \tilde{\mathbf{x}})}$. Mathematical expression of Modified PI and EI under gaussian noise assumption:
 
@@ -37,8 +37,7 @@ $$
 
 ### Current Experiment Result
 
-We test Bayesian Optimisation with 4 acquisition functions at finding optima with the lowest loss on benchmark functions. 
-Bayesian Optimisation using Gaussian Process as surrogate model.
+We test Bayesian Optimisation with 4 acquisition functions at finding the global minima on benchmark functions.
 PI and EI under GP model with original matern kernel and matern+white kernel are both tested as a control group.
 
 Together with white kernel, MPI shows a better result and more stable performance than PI on most of the benchmark functions 
