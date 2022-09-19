@@ -41,9 +41,9 @@ We test Bayesian Optimisation with 4 acquisition functions at finding the global
 PI and EI under GP model with original matern kernel and matern+white kernel are both tested as a control group.
 
 Together with white kernel, MPI shows a better result and more stable performance than PI on most of the benchmark functions 
-against pre-set gaussian noise $\mathcal(\mu=0,\sigma = 10)$, and is believed to be even better when the noise becomes bigger.
+against pre-set gaussian noise $\mathcal{N}(\mu=0,\sigma = 10)$, and is believed to be even better when the noise becomes bigger.
 
-Below is the lowest loss we achieved on each benchmark function adding a gaussian noise $\mathcal(\mu=0,\sigma = 10)$.
+Below is the lowest loss we achieved on each benchmark function adding a gaussian noise $\mathcal{N}(\mu=0,\sigma = 10)$.
 Bayesian Optimisation parameter-setting is : iter = 45, random_search=10000. 
 The result is averaged throughout 30 repeated trails, in (mean±std). All result at [Cloud Drive](https://www.dropbox.com/sh/em5wjbjrwsa69ts/AABesM6USnCL_9jfZW3Yonrda?dl=0).
 |acquisition functions   |six-hump   |rastrigin  |goldstein  |rotated-hyper-ellipsoid|sphere     |
